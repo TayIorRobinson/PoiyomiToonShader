@@ -20977,6 +20977,7 @@ Shader ".poiyomi/Poiyomi Toon"
 				return float3(mul(m, dir.xz), dir.y).xzy;
 			}
 			#endif
+			#include "../../../../TaylorMaterials/Tayterial/Tayterial.hlsl"
 			void applyCubemap(inout PoiFragData poiFragData, in PoiCam poiCam, in PoiMesh poiMesh, in PoiLight poiLight, in PoiMods poiMods)
 			{
 				float3 CubeMapUV = 0;
@@ -21005,7 +21006,7 @@ Shader ".poiyomi/Poiyomi Toon"
 					CubeMapUV = RotateAroundYInDegrees(CubeMapUV.xyz, _CubeMapRotation.y + (_CubeMapRotationPan.y * _Time.y)).xyz;
 					CubeMapUV = RotateAroundYInDegrees(CubeMapUV.xzy, _CubeMapRotation.z + (_CubeMapRotationPan.z * _Time.y)).xzy;
 				}
-				float4 cubeMap = texCUBElod(_CubeMap, float4(CubeMapUV, (1 - _CubeMapSmoothness) * (1 - _CubeMapSmoothness) * 8));
+				float4 cubeMap = tayterial(CubeMapUV); //texCUBElod(_CubeMap, float4(CubeMapUV, (1 - _CubeMapSmoothness) * (1 - _CubeMapSmoothness) * 8));
 				
 				cubeMap.rgb *= poiThemeColor(poiMods, _CubeMapColor, _CubeMapColorThemeIndex);
 				#else
