@@ -1191,7 +1191,7 @@ namespace Thry.ThryEditor
                 target = filterTarget;
             }
 
-            Texture2D atlas = new Texture2D(width, height, TextureFormat.RGBA64, true, targetColorSpace == ColorSpace.Linear);
+            Texture2D atlas = new Texture2D(width, height, TextureFormat.RGBA32, true, targetColorSpace == ColorSpace.Linear);
             RenderTexture.active = target;
             atlas.ReadPixels(new Rect(0, 0, width, height), 0, 0);
             atlas.filterMode = targetFilterMode;
@@ -1276,7 +1276,7 @@ namespace Thry.ThryEditor
             ComputeShader.SetVector("Channels_Add", add);
             ComputeShader.Dispatch(2, _outputTexture.width / 8, _outputTexture.height / 8, 1);
 
-            Texture2D tex = new Texture2D(renderTex.width, renderTex.height, TextureFormat.RGBA64, true, _colorSpace == ColorSpace.Linear);
+            Texture2D tex = new Texture2D(renderTex.width, renderTex.height, TextureFormat.RGBA32, true, _colorSpace == ColorSpace.Linear);
             RenderTexture.active = renderTex;
             tex.ReadPixels(new Rect(0, 0, renderTex.width, renderTex.height), 0, 0);
             tex.filterMode = renderTex.filterMode;
